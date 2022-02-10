@@ -10,7 +10,7 @@ https://packaging.python.org/en/latest/distributing.html
 https://github.com/pypa/sampleproject
 """
 
-from setuptools import setup, find_packages
+from setuptools import setup
 
 # To use a consistent encoding
 from codecs import open
@@ -57,11 +57,8 @@ setup(
     ],
     # What does your project relate to?
     keywords="adafruit blinka circuitpython micropython adxl37x adxl375 motion acceleration "
-             "i2c spi triple axis",
-
+    "i2c spi triple axis",
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
-    # TODO: IF LIBRARY FILES ARE A PACKAGE FOLDER,
-    #       CHANGE `py_modules=['...']` TO `packages=['...']`
     py_modules=["adafruit_adxl37x"],
 )

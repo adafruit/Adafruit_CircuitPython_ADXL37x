@@ -21,7 +21,7 @@ Introduction
     :target: https://github.com/psf/black
     :alt: Code Style: Black
 
-A CircuitPython driver for the ADXL37x family of accelerometers
+A CircuitPython I2C driver for the ADXL37x family of accelerometers
 
 
 Dependencies
@@ -30,6 +30,7 @@ This driver depends on:
 
 * `Adafruit CircuitPython <https://github.com/adafruit/circuitpython>`_
 * `Bus Device <https://github.com/adafruit/Adafruit_CircuitPython_BusDevice>`_
+* `ADXL34x <https://github.com/adafruit/Adafruit_CircuitPython_ADXL34x>`_
 
 Please ensure all dependencies are available on the CircuitPython filesystem.
 This is easily achieved by downloading
@@ -37,19 +38,13 @@ This is easily achieved by downloading
 or individual libraries can be installed using
 `circup <https://github.com/adafruit/circup>`_.
 
-.. todo:: Describe the Adafruit product this library works with. For PCBs, you can also add the
-image from the assets folder in the PCB's GitHub repo.
+This library works with the ADXL375 accelerometer breakout over I2C.
 
 `Purchase one from the Adafruit shop <http://www.adafruit.com/products/5374>`_
 
 
 Installing from PyPI
 =====================
-.. note:: This library is not available on PyPI yet. Install documentation is included
-   as a standard element. Stay tuned for PyPI availability!
-
-.. todo:: Remove the above note if PyPI version is/will be available at time of release.
-
 On supported GNU/Linux systems like the Raspberry Pi, you can install the driver locally `from
 PyPI <https://pypi.org/project/adafruit-circuitpython-adxl37x/>`_.
 To install for current user:
@@ -101,15 +96,19 @@ Or the following command to update an existing version:
 Usage Example
 =============
 
-.. todo:: Add a quick, simple example. It and other examples should live in the
-examples folder and be included in docs/examples.rst.
+.. code-block:: python
 
-Contributing
-============
+    import time
+    import board
+    import adafruit_adxl37x
 
-Contributions are welcome! Please read our `Code of Conduct
-<https://github.com/adafruit/Adafruit_CircuitPython_ADXL37x/blob/HEAD/CODE_OF_CONDUCT.md>`_
-before contributing to help this project stay welcoming.
+    i2c = board.I2C()
+    accelerometer = adafruit_adxl37x.ADXL375(i2c)
+
+    while True:
+        print("%f %f %f" % accelerometer.acceleration)
+        time.sleep(0.2)
+
 
 Documentation
 =============
@@ -117,3 +116,10 @@ API documentation for this library can be found on `Read the Docs <https://docs.
 
 For information on building library documentation, please check out
 `this guide <https://learn.adafruit.com/creating-and-sharing-a-circuitpython-library/sharing-our-docs-on-readthedocs#sphinx-5-1>`_.
+
+Contributing
+============
+
+Contributions are welcome! Please read our `Code of Conduct
+<https://github.com/adafruit/Adafruit_CircuitPython_ADXL37x/blob/HEAD/CODE_OF_CONDUCT.md>`_
+before contributing to help this project stay welcoming.
