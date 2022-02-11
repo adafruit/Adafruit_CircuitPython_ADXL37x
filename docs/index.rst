@@ -24,14 +24,12 @@ Table of Contents
 .. toctree::
     :caption: Tutorials
 
-.. todo:: Add any Learn guide links here. If there are none, then simply delete this todo and leave
-    the toctree above for use later.
+    Adafruit ADXL375 <https://learn.adafruit.com/adafruit-adxl375>
 
 .. toctree::
     :caption: Related Products
 
-.. todo:: Add any product links here. If there are none, then simply delete this todo and leave
-    the toctree above for use later.
+    ADXL375 - High G Accelerometer with I2C - STEMMA QT <https://www.adafruit.com/product/5374>
 
 .. toctree::
     :caption: Other Links
