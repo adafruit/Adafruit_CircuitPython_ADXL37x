@@ -20,9 +20,9 @@ print("Raw y: ", y)
 print("Raw z: ", z)
 
 accelerometer.offset = (
-    int(-(x + 2) / 4),
-    int(-(y + 2) / 4),
-    int(-(z - 20 + 2) / 4),  # Z should be '20' at 1g (49mg per bit)
+    round(-x / 4),
+    round(-y / 4),
+    round(-(z - 20) / 4),  # Z should be '20' at 1g (49mg per bit)
 )
 print("Calibrated offsets: ", accelerometer.offset)
 
