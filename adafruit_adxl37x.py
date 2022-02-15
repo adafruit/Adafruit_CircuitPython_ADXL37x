@@ -28,13 +28,32 @@ Implementation Notes
 
 """
 
+from struct import unpack
 from micropython import const
 import adafruit_adxl34x
+
+try:
+    from typing import Tuple, Optional
+
+    # This is only needed for typing
+    import busio  # pylint: disable=unused-import
+except ImportError:
+    pass
 
 __version__ = "0.0.0-auto.0"
 __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_ADXL37x.git"
 
 _ADXL375_DEFAULT_ADDRESS = const(0x53)
+
+_ADXL347_MULTIPLIER: float = 0.049  # 49mg per lsb
+_STANDARD_GRAVITY: float = 9.80665  # earth standard gravity
+
+_REG_DATAX0: int = const(0x32)  # X-axis data 0
+_REG_DATAX1: int = const(0x33)  # X-axis data 1
+_REG_DATAY0: int = const(0x34)  # Y-axis data 0
+_REG_DATAY1: int = const(0x35)  # Y-axis data 1
+_REG_DATAZ0: int = const(0x36)  # Z-axis data 0
+_REG_DATAZ1: int = const(0x37)  # Z-axis data 1
 
 
 class DataRate(adafruit_adxl34x.DataRate):  # pylint: disable=too-few-public-methods
@@ -79,17 +98,26 @@ class ADXL375(adafruit_adxl34x.ADXL345):
 
     """
 
-    def __init__(self, i2c, address=None):
+    def __init__(self, i2c: busio.I2C, address: Optional[int] = None):
         super().__init__(
             i2c, address if address is not None else _ADXL375_DEFAULT_ADDRESS
         )
 
     @property
-    def range(self):
+    def acceleration(self) -> Tuple[int, int, int]:
+        """The x, y, z acceleration values returned in a 3-tuple in :math:`m / s ^ 2`"""
+        x, y, z = unpack("<hhh", self._read_register(_REG_DATAX0, 6))
+        x = x * _ADXL347_MULTIPLIER * _STANDARD_GRAVITY
+        y = y * _ADXL347_MULTIPLIER * _STANDARD_GRAVITY
+        z = z * _ADXL347_MULTIPLIER * _STANDARD_GRAVITY
+        return x, y, z
+
+    @property
+    def range(self) -> int:
         """Range is fixed. Updating the range is not implemented."""
         return
 
     @range.setter
-    def range(self, val):
+    def range(self, val: int) -> None:
         """Range is fixed. Updating the range is not implemented."""
         raise NotImplementedError("Range not implemented. ADXL375 is fixed at 200G.")
