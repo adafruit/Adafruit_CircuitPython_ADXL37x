@@ -115,7 +115,7 @@ class ADXL375(adafruit_adxl34x.ADXL345):
     @property
     def range(self) -> int:
         """Range is fixed. Updating the range is not implemented."""
-        return
+        raise NotImplementedError("Range not implemented. ADXL375 is fixed at 200G.")
 
     @range.setter
     def range(self, val: int) -> None:
