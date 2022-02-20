@@ -69,7 +69,7 @@ class ADXL375(adafruit_adxl34x.ADXL345):
     Driver for the ADXL375 accelerometer
 
     :param ~busio.I2C i2c: The I2C bus the ADXL375 is connected to.
-    :param address: The I2C device address for the sensor. Default is :const:`0x53`.
+    :param int address: The I2C device address for the sensor. Default is :const:`0x53`.
 
     **Quickstart: Importing and using the device**
 
