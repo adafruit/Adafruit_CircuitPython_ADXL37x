@@ -85,7 +85,7 @@ following command to install:
 
 .. code-block:: shell
 
-    circup install adxl37x
+    circup install adafruit_adxl37x
 
 Or the following command to update an existing version:
 
