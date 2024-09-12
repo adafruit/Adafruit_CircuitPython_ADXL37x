@@ -181,7 +181,7 @@ class ADXL375(adafruit_adxl34x.ADXL345):
     @property
     def events(self) -> Dict[str, bool]:
         """
-        :attr:`events` will return a dictionary with a key for each
+        :attr: `events` will return a dictionary with a key for each
         event type that has been enabled.
         The possible keys are:
 
@@ -194,8 +194,8 @@ class ADXL375(adafruit_adxl34x.ADXL345):
         | ``motion``   | True if the sensor has seen acceleration above the threshold             |
         |              | set with `enable_motion_detection`.                                      |
         +------------+----------------------------------------------------------------------------+
-        |``data_ready``| True if the sensor has data to be read. Can be used for more precise     |
-        |              | timing if reading many samples                                           |
+        | ``data_ready`` | True if the sensor has data to be read. Can be used for more precise   |
+        |                | timing if reading many samples                                         |
         +------------+----------------------------------------------------------------------------+
 
 
