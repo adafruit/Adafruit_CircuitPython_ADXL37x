@@ -34,6 +34,10 @@ intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
     "BusDevice": ("https://docs.circuitpython.org/projects/busdevice/en/latest/", None),
     "CircuitPython": ("https://docs.circuitpython.org/en/latest/", None),
+    "adafruit_adxl34x": (
+        "https://docs.circuitpython.org/projects/adxl34x/en/latest/",
+        None,
+    ),
 }
 
 # Show the docstring from both the class and its __init__() method.

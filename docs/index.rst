@@ -25,11 +25,14 @@ Table of Contents
     :caption: Tutorials
 
     Adafruit ADXL375 <https://learn.adafruit.com/adafruit-adxl375>
+    Adafruit ADXL345 - Triple-Axis Accelerometer (+-2g/4g/8g/16g) w/ I2C/SPI Learning Guide <https://learn.adafruit.com/adxl345-digital-accelerometer>
 
 .. toctree::
     :caption: Related Products
 
-    ADXL375 - High G Accelerometer with I2C - STEMMA QT <https://www.adafruit.com/product/5374>
+    ADXL345 - Triple-Axis Accelerometer (+-2g/4g/8g/16g) w/ I2C/SPI <https://www.adafruit.com/product/1231>
+	ADXL375 - High G Accelerometer with I2C - STEMMA QT <https://www.adafruit.com/product/5374>
+
 
 .. toctree::
     :caption: Other Links
