@@ -189,13 +189,14 @@ class ADXL375(adafruit_adxl34x.ADXL345):
         | Key        | Description                                                                |
         +============+============================================================================+
         | ``tap``      | True if a tap was detected recently. Whether it's looking for a single   |
-        |              | or double tap is determined by the tap param of `enable_tap_detection`   |
+        |              | or double tap is determined by the tap param of                          |
+        |              | :meth:`adafruit_adxl34x.enable_tap_detection`                            |
         +------------+----------------------------------------------------------------------------+
         | ``motion``   | True if the sensor has seen acceleration above the threshold             |
-        |              | set with `enable_motion_detection`.                                      |
+        |              | set with :meth:`adafruit_adxl34x.enable_motion_detection`                |
         +------------+----------------------------------------------------------------------------+
         | ``data_ready`` | True if the sensor has data to be read. Can be used for more precise   |
-        |                | timing if reading many samples                                         |
+        |                | timing if reading many samples. Set with `enable_data_ready_interrupt` |
         +------------+----------------------------------------------------------------------------+
 
 
@@ -238,3 +239,10 @@ class ADXL375(adafruit_adxl34x.ADXL345):
         active_interrupts |= _INT_DATA_READY
         self._write_register_byte(_REG_INT_ENABLE, active_interrupts)
         self._enabled_interrupts["data_ready"] = True
+
+    def disable_data_ready_interrupt(self) -> None:
+        """Disable Data Ready interrupt"""
+        active_interrupts = self._read_register_unpacked(_REG_INT_ENABLE)
+        active_interrupts &= ~_INT_DATA_READY
+        self._write_register_byte(_REG_INT_ENABLE, active_interrupts)
+        self._enabled_interrupts.pop("data_ready")
