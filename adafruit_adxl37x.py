@@ -29,11 +29,12 @@ Implementation Notes
 """
 
 from struct import unpack
-from micropython import const
+
 import adafruit_adxl34x
+from micropython import const
 
 try:
-    from typing import Tuple, Optional, Dict
+    from typing import Dict, Optional, Tuple
 
     # This is only needed for typing
     import busio
@@ -88,11 +89,11 @@ _INT_INACT: int = const(0b00001000)  # INACT bit
 # _INT_FREE_FALL: int = const(0b00000100)  # FREE_FALL  bit, unused in ADXL375
 
 
-class DataRate(adafruit_adxl34x.DataRate):  # pylint: disable=too-few-public-methods
+class DataRate(adafruit_adxl34x.DataRate):
     """Stub class for data rate."""
 
 
-class Range:  # pylint: disable=too-few-public-methods
+class Range:
     """An enum-like class representing the possible measurement ranges in +/- G.
 
     Possible values are:
@@ -145,9 +146,7 @@ class ADXL375(adafruit_adxl34x.ADXL345):
     """
 
     def __init__(self, i2c: busio.I2C, address: Optional[int] = None):
-        super().__init__(
-            i2c, address if address is not None else _ADXL375_DEFAULT_ADDRESS
-        )
+        super().__init__(i2c, address if address is not None else _ADXL375_DEFAULT_ADDRESS)
 
     @property
     def acceleration(self) -> Tuple[int, int, int]:
@@ -208,22 +207,14 @@ class ADXL375(adafruit_adxl34x.ADXL345):
 
         for event_type, value in self._enabled_interrupts.items():
             if event_type == "motion":
-                self._event_status[event_type] = (
-                    interrupt_source_register & _INT_ACT > 0
-                )
+                self._event_status[event_type] = interrupt_source_register & _INT_ACT > 0
             if event_type == "tap":
                 if value == 1:
-                    self._event_status[event_type] = (
-                        interrupt_source_register & _INT_SINGLE_TAP > 0
-                    )
+                    self._event_status[event_type] = interrupt_source_register & _INT_SINGLE_TAP > 0
                 else:
-                    self._event_status[event_type] = (
-                        interrupt_source_register & _INT_DOUBLE_TAP > 0
-                    )
+                    self._event_status[event_type] = interrupt_source_register & _INT_DOUBLE_TAP > 0
             if event_type == "data_ready":
-                self._event_status[event_type] = (
-                    interrupt_source_register & _INT_DATA_READY > 0
-                )
+                self._event_status[event_type] = interrupt_source_register & _INT_DATA_READY > 0
 
         return self._event_status
 
